@@ -7,6 +7,25 @@
         <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='style/table.css') }}"> 
     -->
 
+    <style>
+            html,body {
+            height:100%;width:100% }    
+
+            body {
+            background: url('https://wallpaperaccess.com/full/1462671.jpg') no-repeat center center fixed;
+            background-size: auto auto;
+            background-size: auto 100%;
+            margin: 0;
+            padding: 0;
+            background-color: #343A40; }
+
+            @media screen and (max-width:800px) {
+            body {
+                background-size: cover;
+                background-attachment:fixed }
+            }
+    </style>
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,12 +35,8 @@
         {% endblock %}
     </title>
 </head>
-<body style="background-image: url('https://wallpaperaccess.com/full/1462671.jpg'); 
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            background-size: cover;
-            background-color:#343A40">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="opacity: .85;">
     <a class="navbar-brand" href="{{ url_for('home') }}">GameStats</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>

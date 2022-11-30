@@ -1,0 +1,113 @@
+<!-- Inheritance -->
+{% extends "home.html" %}
+
+<!-- Title Overwrite -->
+{% block title %}
+    Table1
+{% endblock %}
+
+<!-- Navbar Overwrite -->
+{% block navHighlight %}
+<div class="collapse navbar-collapse" id="navbarText">
+    <ul class="navbar-nav mr-auto">
+    <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('home') }}">Home</a>
+    </li>
+    <li class="nav-item active">
+        <a class="nav-link" href="{{ url_for('table1') }}">Table1</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('table2') }}">Table2</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('about') }}">About</a>
+    </li>
+    </ul>
+    <span class="navbar-text">
+    powered by Yanjie Qi & Chikai Shen
+    </span>
+</div>
+{% endblock %}
+
+<!-- Content Overide -->
+{% block content %}
+<div id="searchBar" style="margin-bottom: 1%;">
+    <form action="#" method="post">
+        <div class="form-row align-items-center">
+          <div class="col-auto my-1">
+            <div class="input-group mr-sm-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">Game</div>
+                </div>
+                <input 
+                    type="text" 
+                    class="form-control mr-sm-2" 
+                    id="inlineFormInput" 
+                    placeholder="Counter Strike"
+                    name="GName"
+                >
+            </div>
+          </div>
+
+          <div class="col-auto my-1">
+            <div class="input-group mr-sm-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">Genre</div>
+                </div>
+                <select 
+                    class="custom-select mr-sm-2" 
+                    id="inlineFormCustomSelect"
+                    name="Genre"
+                >
+                    <option selected value="0">FPS</option>
+                    <option value="1">MMORPG</option>
+                    <option value="2">Trading Card</option>
+                    <option value="3">MOBA</option>
+                  </select>
+            </div>
+          </div>
+
+          <div class="col-auto my-1">
+            <div class="input-group mr-sm-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">Company</div>
+                </div>
+                <input 
+                    type="text" 
+                    class="form-control" 
+                    id="inlineFormInputGroup" 
+                    placeholder="Riot"
+                    name="Company"
+                >
+            </div>
+          </div>
+
+          <div class="col-auto my-1">
+            <div class="input-group mr-sm-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">Listed</div>
+                </div>
+                <select 
+                    class="custom-select mr-sm-2" 
+                    id="inlineFormCustomSelect"
+                    name="Listed"
+                >
+                    <option selected value="1">Yes</option>
+                    <option value="0">No</option>
+                </select>
+            </div>
+          </div>
+          <div class="col-auto my-1">
+            <button type="submit" class="btn btn-primary mr-sm-2" name="table1submit">Submit</button>
+          </div>
+        </div>
+      </form>
+</div>
+
+
+<div id="tableDiv" style="border-style: solid; border-color: #454D55;"></div>
+
+
+<!-- External JavaScript -->
+<script type="text/javascript" src="{{ url_for('static', filename='table.js') }}"></script>
+{% endblock %}

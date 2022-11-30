@@ -1,0 +1,12 @@
+# Flask
+- ### Create Vitural 
+    - Create: ```python -m venv FlaskServer```
+    - Activate: ```.\FlaskServer\Scripts\activate``` (for Win)
+- ### Setup Flask
+    - Install Flask: ```pip install flask```
+    - app.py for running the main server
+    - views.py for routes logic
+    - templates folders for HTML templates
+    - static folders for corresponding JavaScript files
+- ### Jinja
+    - HTML Inheritance

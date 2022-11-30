@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <!-- External CSS -->
+    <link rel= "stylesheet" type= "text/css" 
+        href= "{{ url_for('static',filename='style/table.css') }}">
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+</head>
+<body>
+
+    <div id="title">
+        <h1>Template</h1>
+    </div>
+
+
+    <div id="tableDiv"></div>
+
+
+    <!-- External JavaScript -->
+    <script type="text/javascript" src="{{ url_for('static', filename='table.js') }}"></script>
+
+</body>
+</html>

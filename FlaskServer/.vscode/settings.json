@@ -1,0 +1,4 @@
+{
+    "files.associations": {"*.html": "jinja-html"},
+    "editor.defaultFormatter": "vscode.emmet"
+}

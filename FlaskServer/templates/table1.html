@@ -109,6 +109,11 @@
 
 <script type="text/javascript" src="{{ url_for('static', filename='table.js') }}"></script>
 
-
+<script type="text/javascript">
+    var data = {{ data|tojson }};   // get var from python flask to javascript
+    console.log(data);
+    createTable(data, 'tableDiv');
+  </script>
+  
 
 {% endblock %}s

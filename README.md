@@ -1,10 +1,19 @@
+# MySQL Database
+- The project uses MySQL as its production level database
+- The JayDeBeApi module allows to connect from Python code to databases using Java JDBC Driver.
+    - https://pypi.org/project/JayDeBeApi/
 # Flask
-- ## Intro
-    - Flask is a **WSGI** application
-    - https://flask.palletsprojects.com/en/2.2.x/deploying/gunicorn/
-    - A **WSGI server** is used to run the application, converting incoming HTTP requests to the standard WSGI environ, and converting outgoing WSGI responses to HTTP responses
-    - **Gunicorn** is a pure Python WSGI server with simple configuration and multiple worker implementations for performance tuning
-        - https://gunicorn.org/
+- Flask is a **WSGI** application
+- https://flask.palletsprojects.com/en/2.2.x/deploying/gunicorn/
+- A **WSGI server** is used to run the application, converting incoming HTTP requests to the standard WSGI environ, and converting outgoing WSGI responses to HTTP responses
+- **Gunicorn** is a pure Python WSGI server with simple configuration and multiple worker implementations for performance tuning
+    - https://gunicorn.org/
+
+# Project Dependencies
+- Install Requirements under the virtual env: ```pip install -r requirements.txt```
+- Created with ```pip install -r requirements.txt``` under the virtual env
+
+# Setup
 - ### Create Vitural 
     - Create: ```python -m venv FlaskServer```
     - Activate: ```.\FlaskServer\Scripts\activate``` (for Win)
@@ -70,6 +79,7 @@
 
 
     - Source: https://medium.com/techfront/step-by-step-visual-guide-on-deploying-a-flask-application-on-aws-ec2-8e3e8b82c4f7
+
 
 
 

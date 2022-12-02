@@ -8,13 +8,11 @@ app = Flask(__name__)
 # This project does not need Blueprint
 # app.register_blueprint(views, url_prefix="/")
 
+# Database connection thru 
+
 @app.route("/")
 def home():
     return render_template("home.html", name='Denny')
-
-@app.route("/<name>")
-def test(name):
-    return render_template("home.html", name=name)
 
 @app.route("/table1", methods=["GET","POST"])
 def table1():
@@ -24,8 +22,8 @@ def table1():
         print(args['Genre'])
         return redirect(url_for("test", name=args))
     else:
-       
-        return render_template("table1.html")
+        # Empty
+        return render_template("table1.html", data = [])
 
 @app.route("/table2")
 def table2():

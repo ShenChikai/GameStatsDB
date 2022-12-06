@@ -1,5 +1,5 @@
-# MySQL Database
-- The project uses **MariaDB** as its production level database, and this also aligns with the database provided through Ugrad machine
+# MySQL Database with MariaDB
+- The project uses **MariaDB 10.6** as its production level database, and this also aligns with the database provided through Ugrad machine
 - *NOTE: Database configurations are read from environment variable, so do not foget to include a .env file for that.
 - Client Side (Flask)
     - The project will use a client-side **Cursor** to interacting with the database
@@ -7,7 +7,7 @@
         - https://mariadb.com/resources/blog/how-to-connect-python-programs-to-mariadb/
     - Install: ```pip3 install mariadb```
 - Database Side (MariaDB)
-    - The MariaDB will be installed on our Ubuntu instance
+    - **The MariaDB will be installed on our Ubuntu AWS instance**
     - Check connectivity and port: ```netstat -ant | grep 3306```
     - Installation:
         1.  Installing MariaDB
@@ -43,18 +43,19 @@
     - To interact with MariaDB: ```sudo mariadb```
     - Source: https://www.digitalocean.com/community/tutorials/how-to-install-mariadb-on-ubuntu-20-04
 
-# Flask
+# FlaskServer
+## Flask
 - Flask is a **WSGI** application
 - https://flask.palletsprojects.com/en/2.2.x/deploying/gunicorn/
 - A **WSGI server** is used to run the application, converting incoming HTTP requests to the standard WSGI environ, and converting outgoing WSGI responses to HTTP responses
 - **Gunicorn** is a pure Python WSGI server with simple configuration and multiple worker implementations for performance tuning
     - https://gunicorn.org/
 
-# Project Dependencies
+## Project Dependencies
 - Install Requirements under the virtual env: ```pip install -r requirements.txt```
 - Created with ```pip freeze > requirements.txt``` under the virtual env
 
-# Setup
+## Setup and AWS Deployment
 - ### Create Vitural 
     - Create: ```python -m venv FlaskServer```
     - Activate: ```.\FlaskServer\Scripts\activate``` (for Win)
@@ -66,7 +67,7 @@
     - static/ folders for corresponding JavaScript files
     - static/style for css files
     - Run server: ```python \FlaskServer\app.py```
-- ### Depoloyment
+- ### AWS Depoloyment
     1. The Flask app will be deployed on an Ubuntu EC2 on AWS
     2. Inbound allows HTTP, HTTPS, SSH (with RSA key access)
     3. ```ssh -v -i "/Path to PEM" ubuntu@ec2-52-14-195-69.us-east-2.compute.amazonaws.com```
@@ -125,6 +126,6 @@
 
 
 
-- TEMP:
+# TEMP:
     - ssh -v -i D:\Github_Clones\PEMs\Ubuntu.pem ubuntu@ec2-52-14-195-69.us-east-2.compute.amazonaws.com
     - MariaDB admin, shenchikai

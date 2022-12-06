@@ -1,7 +1,48 @@
 # MySQL Database
-- The project uses MySQL as its production level database
-- The JayDeBeApi module allows to connect from Python code to databases using Java JDBC Driver.
-    - https://pypi.org/project/JayDeBeApi/
+- The project uses **MariaDB** as its production level database, and this also aligns with the database provided through Ugrad machine
+- *NOTE: Database configurations are read from environment variable, so do not foget to include a .env file for that.
+- Client Side (Flask)
+    - The project will use a client-side **Cursor** to interacting with the database
+    - MariaDB is a community-developed, commercially supported fork of the MySQL relational database management system
+        - https://mariadb.com/resources/blog/how-to-connect-python-programs-to-mariadb/
+    - Install: ```pip3 install mariadb```
+- Database Side (MariaDB)
+    - The MariaDB will be installed on our Ubuntu instance
+    - Check connectivity and port: ```netstat -ant | grep 3306```
+    - Installation:
+        1.  Installing MariaDB
+            ```
+            sudo apt update
+            sudo apt install mariadb-server
+            sudo systemctl start mariadb.service
+            ```
+        2. Configuring MariaDB
+            ```
+            sudo mysql_secure_installation
+            ```
+           - Set 'root' password to 'admin'
+        3. Creating an 'admin' User that Employs Password Authentication
+            ```
+            sudo mariadb
+            MariaDB [(none)]> GRANT ALL ON *.* to '<username>'@'%' IDENTIFIED BY '<password>' WITH GRANT OPTION;
+            MariaDB [(none)]> FLUSH PRIVILEGES;
+            ```
+        4. Becuase MariaDB default only listens on localhost:3306, we need to change that to 0.0.0.0
+            - Edit MariaDB default configuration file
+            ```sudo vim /etc/mysql/mariadb.cnf```
+            - Remove/Comment the socket connecting option
+            - Add bind-addcress to 0.0.0.0 to open to public remote access
+            ```bind-address = 0.0.0.0```
+            (If you cannot find 'bind-address', I suggest try ```sudo grep -r 'bind-address' /etc/mysql/*``` to locate it first.)
+            - Then restart MariaDB service
+            ```sudo systemctl restart mariadb```
+        5. Configure Firewall
+            - ``` sudo ufw allow 3306``` grant access from any IP address
+            - ``` sudo ufw allow from <specific IP> to any port 3306``` grant access from specifc IP address
+            - Then ```sudo ufw reload```
+    - To interact with MariaDB: ```sudo mariadb```
+    - Source: https://www.digitalocean.com/community/tutorials/how-to-install-mariadb-on-ubuntu-20-04
+
 # Flask
 - Flask is a **WSGI** application
 - https://flask.palletsprojects.com/en/2.2.x/deploying/gunicorn/
@@ -11,12 +52,13 @@
 
 # Project Dependencies
 - Install Requirements under the virtual env: ```pip install -r requirements.txt```
-- Created with ```pip install -r requirements.txt``` under the virtual env
+- Created with ```pip freeze > requirements.txt``` under the virtual env
 
 # Setup
 - ### Create Vitural 
     - Create: ```python -m venv FlaskServer```
     - Activate: ```.\FlaskServer\Scripts\activate``` (for Win)
+    - Deactivate: ```deactivate``` (for Win)
 - ### Local Setup Flask
     - Install Flask: ```pip install flask```
     - app.py for running the main server logic and routings
@@ -85,3 +127,4 @@
 
 - TEMP:
     - ssh -v -i D:\Github_Clones\PEMs\Ubuntu.pem ubuntu@ec2-52-14-195-69.us-east-2.compute.amazonaws.com
+    - MariaDB admin, shenchikai

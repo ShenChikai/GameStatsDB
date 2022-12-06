@@ -1,6 +1,11 @@
 from flask import Flask, render_template, request, jsonify, redirect, url_for
 import requests
+import os
+from dotenv import load_dotenv
 # from views import views
+
+# Customized Import
+from dbConn import connectToDB
 
 # Flask Obj Creation
 app = Flask(__name__)
@@ -8,7 +13,17 @@ app = Flask(__name__)
 # This project does not need Blueprint
 # app.register_blueprint(views, url_prefix="/")
 
-# Database connection thru 
+# Database connection thru MariaDB
+# Load environment variables from the .env file
+load_dotenv()
+dbconfig = {
+    'dbhost' : os.environ["HOST"],
+    'dbuser' : os.environ["USER"],
+    'dbpass' : os.environ["PASS"],
+    'dbname' : os.environ["DB"]
+}
+# Get Cursor
+cursor = connectToDB(dbconfig)
 
 @app.route("/")
 def home():
@@ -28,17 +43,10 @@ def table1():
 @app.route("/table2")
 def table2():
     # testing
-    url = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1"
-    response = requests.get(url)
-    rawData = response.json()
-    data = list(map(lambda x: {
-        'Name': x['name'],
-        'Price': x['current_price'],
-        '24High': x['high_24h'],
-        '24Low': x['low_24h'],
-        'MC': str(int(x['market_cap']) // 1_000_000) + 'M',
-    }, rawData))
-    print(data)
+    data = []
+    cursor.execute( "SELECT * FROM Rawscores")
+    for item in cursor:
+        data.append(item)
     return render_template("table2.html", data = data)
 
 

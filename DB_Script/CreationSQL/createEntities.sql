@@ -1,11 +1,5 @@
--- Execute: \. /home/ubuntu/DB_CREATE/createRelations.sql
+-- Execute: \. /home/ubuntu/DB_CREATE/CreationSQL/createEntities.sql
 -- **If were to drop all entities, must drop all relations first
-DROP TABLE Game;
-DROP TABLE Award;
-DROP TABLE Company;
-DROP TABLE Platform;
-DROP TABLE Stock;
-
 CREATE TABLE Game (
 	GID int Primary Key,
 	GName varchar(50) NOT NULL,
@@ -40,7 +34,7 @@ CREATE TABLE Stock (
 	Ticker varchar(10) Primary Key,
 	Country varchar(30),
 	Exchange varchar(30) NOT NULL,
-	HistoricalHigh float(10, 2),
-	HistoricalLow float(10, 2),
-	MarketCap int
+	FiftyTwoWeekHigh float(10, 2),
+	FiftyTwoWeekLow float(10, 2),
+	Market varchar(10)
 );

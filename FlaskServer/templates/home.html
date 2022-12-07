@@ -12,19 +12,26 @@
             height:100%;width:100% }    
 
             body {
-            background: url('https://wallpaperaccess.com/full/1462671.jpg') no-repeat center center fixed;
-            background-size: auto auto;
-            background-size: auto 100%;
-            margin: 0;
-            padding: 0;
-            background-color: #343A40; }
+                background: url('https://wallpaperaccess.com/full/1462671.jpg');
+                background-size: cover;
+                background-position: center top;
+                background-repeat: no-repeat;
+
+                margin: 0;
+                padding: 0;
+                background-color: #343A40; 
+            }
 
             @media screen and (max-width:800px) {
             body {
                 background-size: cover;
                 background-attachment:fixed }
             }
+
     </style>
+    {% block style %} 
+        <!-- Style Overwrite -->
+    {% endblock %}
 
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -48,10 +55,10 @@
             <a class="nav-link" href="{{ url_for('home') }}">Home</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('table1') }}">Table1</a>
+            <a class="nav-link" href="{{ url_for('interactiveTable') }}">Interactive Table</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('table2') }}">Table2</a>
+            <a class="nav-link" href="{{ url_for('marketSahre') }}">Share Analysis</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{{ url_for('about') }}">About</a>

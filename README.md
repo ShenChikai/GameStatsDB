@@ -1,3 +1,6 @@
+# Project Intro
+- The goal of the project is to offer tools to analyze gaming platforms, explore gaming industry companies, and search for games desired by the users given a list of available search, sort, and filter options. The project provides analysis on various popular games on the market along with information of their publisher companies and their platforms based on data from gaming awards, sales, genres, company stock performance, etc. The complete product will be presented in a form of full-stack 3-tier architecture with web-based client, functional and utility server, and relational database each handling their specific tasks.
+
 # MySQL Database with MariaDB
 - The project uses **MariaDB 10.6** as its production level database, and this also aligns with the database provided through Ugrad machine
 - *NOTE: Database configurations are read from environment variable, so do not foget to include a .env file for that.
@@ -123,9 +126,18 @@
 
     - Source: https://medium.com/techfront/step-by-step-visual-guide-on-deploying-a-flask-application-on-aws-ec2-8e3e8b82c4f7
 
-
+# Front End
+## JavaScript
+- Bootstrap
+    - https://getbootstrap.com/docs/5.2/getting-started/introduction/
+- Chart.js
+    - https://www.chartjs.org/docs/2.9.4/
 
 
 # TEMP:
     - ssh -v -i D:\Github_Clones\PEMs\Ubuntu.pem ubuntu@ec2-52-14-195-69.us-east-2.compute.amazonaws.com
     - MariaDB admin, shenchikai
+\. /home/ubuntu/DB_CREATE/CreationSQL/dropAll.sql
+\. /home/ubuntu/DB_CREATE/CreationSQL/createEntities.sql
+\. /home/ubuntu/DB_CREATE/CreationSQL/createRelations.sql
+\. /home/ubuntu/DB_CREATE/CreationSQL/insertAll.sql

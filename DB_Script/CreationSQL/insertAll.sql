@@ -1,3 +1,4 @@
+-- Execute: \. /home/ubuntu/DB_CREATE/CreationSQL/insertAll.sql
 -- ############################# Entities #############################
 -- Game
 -- 1,007: Quantum of Solace,3.3,2008/10/31,FALSE
@@ -39,6 +40,18 @@ IGNORE 1 ROWS
 (PID, PName, @FoundDate)
 SET FoundDate = DATE_FORMAT(@FoundDate, '%Y-%m-%d');
 
+-- Stock
+-- ATVI,United States,NMS,86.9,57.47,us_market
+LOAD DATA LOCAL INFILE '/home/ubuntu/DB_CREATE/CSV_Data/Stock.csv'
+INTO TABLE Stock
+FIELDS TERMINATED BY ','
+ENCLOSED BY ''
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS
+(Ticker,Country,Exchange,@FiftyTwoWeekHigh,@FiftyTwoWeekLow,Market)
+SET FiftyTwoWeekHigh = CAST(@FiftyTwoWeekHigh AS DECIMAL(10,2)),
+FiftyTwoWeekLow = CAST(@FiftyTwoWeekLow AS DECIMAL(10,2));
+
 -- ############################# Relations #############################
 -- GameNominatedByAward 
 LOAD DATA LOCAL INFILE '/home/ubuntu/DB_CREATE/CSV_Data/GameNominatedByAward.csv'
@@ -59,6 +72,14 @@ IGNORE 1 ROWS;
 -- CompanyOwnsGame  
 LOAD DATA LOCAL INFILE '/home/ubuntu/DB_CREATE/CSV_Data/CompanyOwnsGame.csv'
 INTO TABLE CompanyOwnsGame
+FIELDS TERMINATED BY ','
+ENCLOSED BY ''
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
+
+-- CompanyOwnsPlatform 
+LOAD DATA LOCAL INFILE '/home/ubuntu/DB_CREATE/CSV_Data/CompanyOwnsPlatform.csv'
+INTO TABLE CompanyOwnsPlatform
 FIELDS TERMINATED BY ','
 ENCLOSED BY ''
 LINES TERMINATED BY '\n'

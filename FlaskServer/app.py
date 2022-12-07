@@ -29,8 +29,8 @@ cursor = connectToDB(dbconfig)
 def home():
     return render_template("home.html", name='Denny')
 
-@app.route("/table1", methods=["GET","POST"])
-def table1():
+@app.route("/interactiveTable", methods=["GET","POST"])
+def interactiveTable():
     # handle get request
     if request.method == "POST":
         args = request.form
@@ -38,16 +38,43 @@ def table1():
         return redirect(url_for("test", name=args))
     else:
         # Empty
-        return render_template("table1.html", data = [])
+        return render_template("interactiveTable.html", data = [])
 
-@app.route("/table2")
-def table2():
-    # testing
-    data = []
-    cursor.execute( "SELECT * FROM Rawscores")
+@app.route("/marketSahre")
+def marketSahre():
+    labels = {
+        "GenreShare": [],
+        "PlatformShare": [],
+        "OSShare": [],
+        "CompanyMCShare": []
+    }
+    data = {
+        "GenreShare": [],
+        "PlatformShare": [],
+        "OSShare": [],
+        "CompanyMCShare": []
+    }
+    # Get GenreShare
+    cursor.execute( "CALL GenreShare()")
     for item in cursor:
-        data.append(item)
-    return render_template("table2.html", data = data)
+        labels["GenreShare"].append(item[0])
+        data["GenreShare"].append(item[2])
+    # Get PlatformShare
+    cursor.execute( "CALL PlatformShare()")
+    for item in cursor:
+        labels["PlatformShare"].append(item[0])
+        data["PlatformShare"].append(item[2])
+    # Get OSShare
+    cursor.execute( "CALL OSShare()")
+    for item in cursor:
+        labels["OSShare"].append(item[0])
+        data["OSShare"].append(item[2])
+    # Get CompanyMCShare
+    cursor.execute( "CALL CompanyMCShare()")
+    for item in cursor:
+        labels["CompanyMCShare"].append(item[0])
+        data["CompanyMCShare"].append(item[2])
+    return render_template("marketShare.html", labels = labels, data = data)
 
 
 

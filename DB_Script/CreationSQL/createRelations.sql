@@ -1,17 +1,8 @@
--- Execute: \. /home/ubuntu/DB_CREATE/createRelations.sql
-DROP TABLE GameNominatedByAward;
-DROP TABLE GameHasGenre;
-DROP TABLE CompanyOwnsPlatform;
-DROP TABLE CompanyOwnsGame;
-DROP TABLE PlatformHostsGame;
-DROP TABLE GameIsAvailableOn;
-DROP TABLE CompanyHasStock;
-DROP TABLE TimeTickerPrice;
-
+-- Execute: \. /home/ubuntu/DB_CREATE/CreationSQL/createRelations.sql
 CREATE TABLE GameNominatedByAward (
 	GID int,
 	AID int,
-	Year datetime NOT NULL,
+	YearNominated int,
 	DidWin int,
 
 	FOREIGN KEY (GID) REFERENCES Game(GID),

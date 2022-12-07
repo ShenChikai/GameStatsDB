@@ -1,0 +1,98 @@
+<!-- Inheritance -->
+{% extends "home.html" %}
+
+<!-- Style Overwrite -->
+{% block style %}
+<style>
+.chartContainer {
+    display: flex; 
+    flex-wrap: wrap; 
+    justify-content: center;
+    max-width: 1400px;
+}
+.chartBox {
+    width:50%; 
+    max-width:500px; 
+    padding-left: 2%;
+    padding-right: 2%;
+    padding-bottom: 4%;
+}
+.chart {
+    background-color: rgba(160,160,160,0.15);
+}
+</style>
+{% endblock %}
+
+<!-- Title Overwrite -->
+{% block title %}
+    About
+{% endblock %}
+
+<!-- Navbar Overwrite -->
+{% block navHighlight %}
+<div class="collapse navbar-collapse" id="navbarText">
+    <ul class="navbar-nav mr-auto">
+    <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('home') }}">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('interactiveTable') }}">Interactive Table</a>
+    </li>
+    <li class="nav-item active">
+        <a class="nav-link" href="{{ url_for('marketSahre') }}">Share Analysis</a>
+    </li>
+    <li class="nav-item ">
+        <a class="nav-link" href="{{ url_for('about') }}">About</a>
+    </li>
+    </ul>
+    <span class="navbar-text">
+    powered by Yanjie Qi & Chikai Shen
+    </span>
+</div>
+{% endblock %}
+
+
+<!-- Content Overide -->
+{% block content %}
+
+<h1 style="color: rgba(255,255,255, 0.8);font-family: Arial;">General Market Share Analysis</h1>
+<div style="display: flex;justify-content: center;">
+    
+    <div class="chartContainer">
+
+        <div class="chartBox">
+            <canvas id="GenreShare" class="chart shadow"></canvas>
+        </div>
+
+        <div class="chartBox">
+            <canvas id="PlatformShare" class="chart shadow"></canvas>
+        </div>
+
+        <div class="chartBox">
+            <canvas id="OSShare" class="chart shadow"></canvas>
+        </div>
+
+        <div class="chartBox">
+            <canvas id="CompanyMCShare" class="chart shadow"></canvas>
+        </div>
+
+
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script> 
+
+<script type="text/javascript" src="{{ url_for('static', filename='marketShare.js') }}"></script>
+
+<script>
+    var labels = {{ labels|tojson }}; 
+    var data = {{ data|tojson }}; 
+    // createPie(id, title, labels, data)
+    console.log(labels)
+    createHist("GenreShare", "Share by Genre", labels["GenreShare"], data["GenreShare"]);
+    createPie("PlatformShare", "Share by Platform", labels["PlatformShare"], data["PlatformShare"]);
+    createPie("OSShare", "Share by OS", labels["OSShare"], data["OSShare"]);
+    createPie("CompanyMCShare", "Share by Company MC", labels["CompanyMCShare"], data["CompanyMCShare"]);
+</script>
+
+{% endblock %}

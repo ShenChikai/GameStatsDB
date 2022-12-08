@@ -269,18 +269,33 @@ function renderStock(id, title, ohlc, volume) {
 
 function check() {
     var options = document.getElementById("companyList").options;
-    var pass = false;
+    var namePass = false, datePass = false;
 
+    // check CompanyName is in the list?
     for (var i = 0; i < options.length; i++) {
         if (document.getElementById("companyInput").value == options[i].value) {
-            pass = true;
+            namePass = true;
         }
     }
-    if (!pass) {
+    if (!namePass) {
         document.getElementById("validationAlert").style.marginLeft = '15px';
         document.getElementById("validationAlert").style.color = "#CD302E";
         document.getElementById("validationAlert").innerHTML = "You must enter a company that is in the list.";
         return false;
     }
+    
+    // check EndDate > StartDate?
+    const StartDate = new Date(document.getElementById("startDate").value);
+    const EndDate = new Date(document.getElementById("endDate").value);
+    if (EndDate > StartDate) {
+        datePass = true;
+    }
+    if (!datePass) {
+        document.getElementById("validationAlert").style.marginLeft = '15px';
+        document.getElementById("validationAlert").style.color = "#CD302E";
+        document.getElementById("validationAlert").innerHTML = "End date must be before start date.";
+        return false;
+    }
+
     return true;
 }

@@ -120,8 +120,7 @@
             ```
     12. To restart service
         - Do step 9.
-        - ```sudo systemctl restart FlaskServer```
-        - ```sudo systemctl enable FlaskServer```
+        - If setp 9. does not work, do below:
         - ```sudo service apache2 stop```
         - ```sudo systemctl restart nginx```
         - ```sudo systemctl enable nginx```

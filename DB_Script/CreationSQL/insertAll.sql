@@ -100,3 +100,28 @@ FIELDS TERMINATED BY ','
 ENCLOSED BY ''
 LINES TERMINATED BY '\n'
 IGNORE 1 ROWS;
+
+-- CompanyHasStock  
+LOAD DATA LOCAL INFILE '/home/ubuntu/DB_CREATE/CSV_Data/CompanyHasStock.csv'
+INTO TABLE CompanyHasStock
+FIELDS TERMINATED BY ','
+ENCLOSED BY ''
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
+
+-- TimeTickerPrice  
+-- 2020-12-07,4751.T,1710.0,1755.0,1705.0,1705.0,1677.94189453125,2498400
+LOAD DATA LOCAL INFILE '/home/ubuntu/DB_CREATE/CSV_Data/TimeTickerPrice.csv'
+INTO TABLE TimeTickerPrice
+FIELDS TERMINATED BY ','
+ENCLOSED BY ''
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS
+(@Date,Ticker, @Open, @High, @Low, @Close, @Adj_Close, Volume)
+SET Date = DATE_FORMAT(@Date, '%Y-%m-%d'),
+Open = CAST(@Open AS DECIMAL(10,2)),
+High = CAST(@High AS DECIMAL(10,2)),
+Low = CAST(@Low AS DECIMAL(10,2)),
+Close = CAST(@Close AS DECIMAL(10,2)),
+Adj_Close = CAST(@Adj_Close AS DECIMAL(10,2))
+;

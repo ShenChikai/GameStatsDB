@@ -5,20 +5,44 @@
 {% block style %}
 <style>
 .chartContainer {
-    display: flex; 
-    flex-wrap: wrap; 
+    display: flex;
+    flex-direction:row;
+    flex-wrap:wrap;
     justify-content: center;
-    max-width: 1400px;
+    
 }
 .chartBox {
-    width:50%; 
-    max-width:500px; 
+    min-width: 600px;
+    min-height: 400px;
     padding-left: 2%;
     padding-right: 2%;
     padding-bottom: 4%;
 }
 .chart {
     background-color: rgba(160,160,160,0.15);
+}
+
+@media (max-width: 1000px) {
+
+    .chartContainer {
+        display: flex;
+        flex-direction:row;
+        flex-wrap:wrap;
+        justify-content: center;
+        
+    }
+    .chartBox {
+        min-width: 100%;
+        padding-left: 2%;
+        padding-right: 2%;
+        padding-bottom: 4%;
+    }
+    .chart {
+        width: 100%;
+        height: 400px;
+        background-color: rgba(160,160,160,0.15);
+    }
+
 }
 </style>
 {% endblock %}
@@ -55,8 +79,8 @@
 <!-- Content Overide -->
 {% block content %}
 
-<h1 style="color: rgba(255,255,255, 0.8);font-family: Arial;">General Market Share Analysis</h1>
-<div style="display: flex;justify-content: center;">
+<h1 style="color: rgba(255,255,255, 0.9);font-family: Arial;">General Market Share Analysis</h1>
+<div style="justify-content: center;">
     
     <div class="chartContainer">
 

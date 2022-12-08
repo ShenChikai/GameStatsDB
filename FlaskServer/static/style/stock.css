@@ -1,0 +1,35 @@
+.highcharts-background {
+    fill: rgba(61, 45, 45, 0.4);
+  }
+
+.highcharts-credits {
+    fill: rgba(0, 0, 0, 0.05) !important;
+}
+
+.highcharts-point-up {
+    fill: rgba(67, 160, 71, 1) !important;
+    stroke: rgba(67, 160, 71, 1) !important;
+}
+
+.highcharts-point-down {
+    fill: rgba(245,81,30,1) !important;
+    stroke: rgba(245,81,30,1) !important;
+}
+
+.highcharts-color-1{
+    fill: rgb(12, 172, 212) !important;
+}
+
+.highcharts-label-box{
+    stroke: rgba(152,36,39, 0.5) !important;
+    fill: rgba(0, 0, 0, 0.6) !important;
+}
+
+.highcharts-tooltip-box {
+    fill: rgba(0, 0, 0, 0.6) !important;
+}
+
+.highcharts-axis-title {
+    color: white !important;
+    fill: white !important;
+}

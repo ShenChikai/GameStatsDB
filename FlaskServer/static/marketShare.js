@@ -67,7 +67,8 @@ function createPie(id, title, labels, data) {
             fontColor: 'rgba(255,255,255, 0.8)',
             fontFamily: "Garamond, serif",
             fontSize: 30,
-        }
+        },
+        maintainAspectRatio: false
     }
     });
 }
@@ -122,6 +123,7 @@ function createHist(id, title, labels, data) {
             },
             indexAxis: 'y',
             skipNull: true,
+            maintainAspectRatio: false
         }
         });
 }

@@ -58,10 +58,15 @@ CREATE TABLE CompanyHasStock (
 
 
 CREATE TABLE TimeTickerPrice (
-	MonthlyDate datetime Primary Key,
+	Date datetime,
 	Ticker varchar(10),
-	MonthAvgPrice float(10,2) NOT NULL,
-	MonthAvgVolume float(10,2),
+	Open float(10,2),
+	High float(10,2),
+	Low float(10,2),
+	Close float(10,2),
+	Adj_Close float(10,2),
+	Volume float(12,2),
 
 	FOREIGN KEY (Ticker) REFERENCES Stock(Ticker)
 );
+

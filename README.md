@@ -120,8 +120,10 @@
             ```
     12. To restart service
         - Do step 9.
+        - ```sudo systemctl restart FlaskServer```
         - ```sudo service apache2 stop```
         - ```sudo systemctl restart nginx```
+    13. Site available through: ```52.14.195.69```
 
 
     - Source: https://medium.com/techfront/step-by-step-visual-guide-on-deploying-a-flask-application-on-aws-ec2-8e3e8b82c4f7

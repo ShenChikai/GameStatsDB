@@ -15,7 +15,8 @@ app = Flask(__name__)
 
 # Database connection thru MariaDB
 # Load environment variables from the .env file
-load_dotenv()
+dotenv_path = os.path.abspath('.env') #travels up a level to find the .env
+load_dotenv(dotenv_path)
 dbconfig = {
     'dbhost' : os.environ["HOST"],
     'dbuser' : os.environ["USER"],

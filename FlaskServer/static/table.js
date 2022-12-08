@@ -1,5 +1,12 @@
 // General Create Table Function
-function createTable(data, target) {
+function createTable(header, data, target) {
+    if (data.length == 0) {
+        alertTxt = document.createElement('h1');
+        alertTxt.style.color = 'Red';
+        alertTxt.textContent = "No Result Found... Try something else!";
+        document.getElementById(target).appendChild(alertTxt);
+        return 0;
+    }
 
     var table = document.createElement('table');
     table.classList.add("table");    // from bootstrap 
@@ -9,14 +16,10 @@ function createTable(data, target) {
     // header
     var thead = document.createElement('thead');
     var row = document.createElement('tr');
-    var cell = document.createElement('th');    // Index Header
-    cell.scope = "col";
-    cell.textContent = "Index";
-    row.appendChild(cell);
-    for (const prop in data[0]) {
+    for (let i = 0; i < header.length; i++) {
         var cell = document.createElement('th');
         cell.scope = "col";
-        cell.textContent = prop;
+        cell.textContent = header[i];
         row.appendChild(cell);
     }
     thead.appendChild(row);
@@ -24,15 +27,21 @@ function createTable(data, target) {
 
     // data
     var tbody = document.createElement('tbody');
-    for (var i = 0; i < data.length; i++) {
+    for (let i = 0; i < data.length; i++) {
         row = document.createElement('tr');
-        var cell = document.createElement('th');    // Row Num
-        cell.scope = "row";
-        cell.textContent = i;
-        row.appendChild(cell);
-        for (const prop in data[0]) {
+        for (let j = 0; j < data[i].length; j++) {
             var cell = document.createElement('td');
-            cell.textContent = data[i][prop];
+            if (header[j] == "F2P") {
+                if (data[i][j] == "True") {
+                    cell.innerHTML = "&#x274E;";
+                } else {
+                    cell.innerHTML = "&#x274C;";
+                }
+            } else if (header[j] == "Sales" || header[j] == "MarketCap") {
+                cell.innerHTML = data[i][j];
+            } else {
+                cell.textContent = data[i][j];
+            }
             row.appendChild(cell);
         }
         tbody.appendChild(row);
@@ -41,4 +50,21 @@ function createTable(data, target) {
 
     // append to div
     document.getElementById(target).appendChild(table);
+}
+
+function fillDataListOptions(id, data) {
+    for (let i = 0; i < data.length; i++) {
+        var option = document.createElement('option');
+        option.value = data[i];
+        document.getElementById(id).appendChild(option);
+    };
+}
+
+function fillDropDownOptions(id, data) {
+    for (let i = 0; i < data.length; i++) {
+        var option = document.createElement('option');
+        option.value = data[i];
+        option.innerHTML = data[i];
+        document.getElementById(id).appendChild(option);
+    };
 }

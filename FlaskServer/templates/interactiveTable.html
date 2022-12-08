@@ -1,6 +1,15 @@
 <!-- Inheritance -->
 {% extends "home.html" %}
 
+<!-- Style Overwrite -->
+{% block style %}
+<style>
+table {
+    background-color: rgba(52,58,64,0.6) !important;
+}
+</style>
+{% endblock %}
+
 <!-- Title Overwrite -->
 {% block title %}
     Table1
@@ -31,6 +40,8 @@
 
 <!-- Content Overide -->
 {% block content %}
+<h3 style="color: rgba(255,255,255, 0.9);font-family: Arial;"> 
+    &#127918;Explore the Game for You. </h3>
 <div id="searchBar" style="margin-bottom: 1%;">
     <form action="#" method="post">
         <div class="form-row align-items-center">
@@ -40,12 +51,14 @@
                     <div class="input-group-text">Game</div>
                 </div>
                 <input 
+                    list="GameList"
                     type="text" 
                     class="form-control mr-sm-2" 
                     id="inlineFormInput" 
-                    placeholder="Counter Strike"
-                    name="GName"
+                    placeholder=""
+                    name="GameName"
                 >
+                <datalist id="GameList"></datalist>
             </div>
           </div>
 
@@ -54,51 +67,54 @@
                 <div class="input-group-prepend">
                     <div class="input-group-text">Genre</div>
                 </div>
-                <select 
-                    class="custom-select mr-sm-2" 
-                    id="inlineFormCustomSelect"
+                <input 
+                    list="GenreList"
+                    type="text" 
+                    class="form-control mr-sm-2" 
+                    id="inlineFormInput" 
+                    placeholder=""
                     name="Genre"
                 >
-                    <option selected value="0">FPS</option>
-                    <option value="1">MMORPG</option>
-                    <option value="2">Trading Card</option>
-                    <option value="3">MOBA</option>
-                  </select>
+                <datalist id="GenreList"></datalist>
             </div>
           </div>
 
           <div class="col-auto my-1">
             <div class="input-group mr-sm-2">
                 <div class="input-group-prepend">
-                    <div class="input-group-text">Company</div>
+                    <div class="input-group-text">Platform</div>
                 </div>
-                <input 
-                    type="text" 
-                    class="form-control" 
-                    id="inlineFormInputGroup" 
-                    placeholder="Riot"
-                    name="Company"
-                >
-            </div>
-          </div>
-
-          <div class="col-auto my-1">
-            <div class="input-group mr-sm-2">
-                <div class="input-group-prepend">
-                    <div class="input-group-text">Listed</div>
-                </div>
-                <select 
-                    class="custom-select mr-sm-2" 
-                    id="inlineFormCustomSelect"
-                    name="Listed"
-                >
-                    <option selected value="1">Yes</option>
-                    <option value="0">No</option>
+                <select class="form-control" id="PlatformList" name="Platform">
+                    <option value="" selected></option>
                 </select>
             </div>
           </div>
+          
           <div class="col-auto my-1">
-            <button type="submit" class="btn btn-primary mr-sm-2" name="table1submit">Submit</button>
+            <div class="input-group mr-sm-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">Award</div>
+                </div>
+                <select class="form-control" id="AwardList" name="Award">
+                    <option value="" selected></option>
+                </select>
+            </div>
+          </div>
+          
+          <div class="col-auto my-1">
+            <div class="input-group mr-sm-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">Sales</div>
+                </div>
+                <select class="form-control" id="SaleOrder" name="Sales">
+                    <option value="True">🔽 Desc</option>
+                    <option value="False">🔼 Asc</option>
+                </select>
+            </div>
+          </div>
+
+          <div class="col-auto my-1">
+            <button type="submit" class="btn btn-primary mr-sm-2" name="tableSubmit">Search&#128269;</button>
           </div>
         </div>
       </form>
@@ -110,9 +126,20 @@
 <script type="text/javascript" src="{{ url_for('static', filename='table.js') }}"></script>
 
 <script type="text/javascript">
-    var data = {{ data|tojson }};   // get var from python flask to javascript
-    console.log(data);
-    createTable(data, 'tableDiv');
+    var GameList = {{ GameList|tojson }};   // get var from python flask to javascript
+    var GenreList = {{ GenreList|tojson }};
+    var PlatformList = {{ PlatformList|tojson }};
+    var AwardList = {{ AwardList|tojson }};
+    // fill options
+    fillDataListOptions('GameList',GameList);
+    fillDataListOptions('GenreList',GenreList);
+    fillDropDownOptions('PlatformList',PlatformList);
+    fillDropDownOptions('AwardList',AwardList);
+
+    var header = {{ header|tojson }};
+    var table = {{ table|tojson }};
+    
+    createTable(header, table, 'tableDiv');
   </script>
   
 

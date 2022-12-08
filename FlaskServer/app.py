@@ -20,9 +20,9 @@ app = Flask(__name__)
 dotenv_path = os.path.abspath('.env') #travels up a level to find the .env
 load_dotenv(dotenv_path)
 dbconfig = {
-    'dbhost' : os.environ["HOST"],
-    'dbuser' : os.environ["USER"],
-    'dbpass' : os.environ["PASS"],
+    'dbhost' : os.environ["DBHOST"],
+    'dbuser' : os.environ["DBUSER"],
+    'dbpass' : os.environ["DBPASS"],
     'dbname' : os.environ["DB"]
 }
 # Get Cursor
@@ -57,7 +57,7 @@ def home():
             
         return render_template("home.html", CompanyList=CompanyList, CompanyName=args['CompanyName'], OHLC=OHLC, Volume=Volume)
     else:
-        # Start Page
+        # Init Page
         OHLC = []
         Volume = []
         cursor.execute( "CALL GetStock('Microsoft', '2020-08-01', '2022-08-02');")
@@ -76,11 +76,112 @@ def interactiveTable():
     # handle get request
     if request.method == "POST":
         args = request.form
-        print(args['Genre'])
-        return redirect(url_for("test", name=args))
+        # Get Options
+        gameOpt, genreOpt, platformOpt, AwardOpt = getAllOptions(cursor)
+        
+        # Execute the Table Query
+        header, table = tableProc(args['GameName'],
+                                    args['Genre'],
+                                    args['Platform'],
+                                    args['Award'],
+                                    args['Sales']
+                                )
+        
+        # Debug Script
+        # print('############################################################')
+        # print(f'Statment: {cursor.statement}')
+        # print(f"args: {args['GameName']}, {args['Genre']}, {args['Platform']}, {args['OS']}, {args['Sales']}")
+        print(f'Num row returned: {cursor.rowcount}')
+        # print(f'Description: {cursor.description}')
+
+        return render_template("interactiveTable.html", 
+                                    GameList=gameOpt, 
+                                    GenreList=genreOpt, 
+                                    PlatformList=platformOpt, 
+                                    AwardList=AwardOpt,
+                                    header = header,
+                                    table = table
+                                )
     else:
-        # Empty
-        return render_template("interactiveTable.html", data = [])
+        # Init Page
+        # Get Options
+        gameOpt, genreOpt, platformOpt, AwardOpt = getAllOptions(cursor)
+        
+        # Init start with '','','PC','Microsoft Windows','True'
+        # Execute the Table Query
+        header, table = tableProc('', '', '', 'Game of the Year', 'True')
+
+        # Debug Script
+        # print('############################################################')
+        # print(f'Statment: {cursor.statement}')
+        # print(f"args: {args['GameName']}, {args['Genre']}, {args['Platform']}, {args['OS']}, {args['Sales']}")
+        print(f'Num row returned: {cursor.rowcount}')
+        # print(f'Description: {cursor.description}')
+
+        return render_template("interactiveTable.html", 
+                                    GameList=gameOpt, 
+                                    GenreList=genreOpt, 
+                                    PlatformList=platformOpt, 
+                                    AwardList=AwardOpt,
+                                    header = header,
+                                    table = table
+                                )
+
+# Get All Options
+def getAllOptions(cursor):
+    gameOpt, genreOpt, platformOpt, AwardOpt = [], [], [], []
+    cursor.callproc( "GetAllTableOptions" )
+    # Games
+    for item in cursor:
+        gameOpt.append(item[0])
+    # Genre
+    cursor.nextset()
+    for item in cursor:
+        genreOpt.append(item[0])
+    # Platform
+    cursor.nextset()
+    for item in cursor:
+        platformOpt.append(item[0])
+    # Award
+    cursor.nextset()
+    for item in cursor:
+        AwardOpt.append(item[0])
+    return gameOpt, genreOpt, platformOpt, AwardOpt
+
+# Retrieve Data for Table Proc Call
+def tableProc(GameName, Genre, Platform, Award, SalesOpt):
+    cursor.callproc("InteractiveTableSearch", (
+                        GameName, Genre, Platform, Award, SalesOpt
+                    ))
+        
+    header = []
+    for column in cursor.description:
+        header.append(column[0])
+    
+    table = []
+    for item in cursor:
+        if item[9] == 1:
+            won = 'Yes'
+        else:
+            if not item[7]:
+                won = 'N\A'
+            else:
+                won = 'No'
+
+        table.append([
+            item[0],
+            '&#128178;' + str(round(item[1],3)) + 'M',
+            item[2].strftime("%Y/%m/%d"),
+            item[3] if item[3] else 'N\A',
+            item[4] if item[4] else 'N\A',
+            '&#128178;' + str(item[5] // 1_000_000)[:-2] + 'M' if item[5] else 'N\A',
+            item[6] if item[6] else 'N\A',
+            'N\A' if not item[7] else item[7],
+            'N\A' if not item[8] else item[8],
+            won
+        ])
+    
+    return header, table
 
 ############################################################################################
 # Market Share Page

@@ -65,6 +65,7 @@
 - ### Create Vitural 
     - Create: ```python -m venv FlaskServer```
     - Activate: ```.\FlaskServer\Scripts\activate``` (for Win)
+        - in Linux: ```source FlaskServer/Scripts/activate```
     - Deactivate: ```deactivate``` (for Win)
 - ### Local Setup Flask
     - Install Flask: ```pip install flask```

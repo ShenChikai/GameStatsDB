@@ -18,7 +18,7 @@ class User2SQL:
     def get_user_input(self, user_input: str) -> None:
         self.user_input = user_input
         self.pre_condition_setup()
-
+    # Set up the pre-conditions and concat with user input as the input message
     def pre_condition_setup(self) -> None:
         prereq = "Suppose I have following table in my mySQL Database: \n"
         gametable1 = "1. Table Game which has GID (Game ID), GName (Game Name), Sales (the sale amount of this game)"
@@ -39,22 +39,29 @@ class User2SQL:
         allprereq = prereq+gametable1+gametable2+Award+company+Platform+Stock+GameNominatedByAward+GameHasGenre+CompanyOwnsPlatform+CompanyOwnsGame+PlatformHostsGame\
             + GameIsAvailableOn + CompanyHasStock +TimeTickerPrice +question
         self.user_input = allprereq + self.user_input
-
+    # Get response from the ChatGPT and get sql query from response2SQL
     def get_response(self) -> str:
         self.response = self.chatbot.get_chat_response(self.user_input, output="text")['message']
         return self.response2SQL()
-
+    # parse the response and get sql query
     def response2SQL(self) -> str:
-        query = self.response.split("\n```\n")[1].rstrip('\n').split('\n')
-        query = "".join(query)
+        try:
+            query = self.response.split("\n```\n")[1].rstrip('\n').split('\n')
+        except:
+            print("Question is either not in the correct format or we do not have such information in our database!")
+        query = " ".join(query)
         if query[-1] != ";":
             query += ";"
         return query
 
 def main():
+    # Initialize User2SQL object
     newChat = User2SQL()
-    user_input = input("What kind of question do you have?\n For example, you could try ask: What is the Game Name that has highest sales?\n")
+    # Get User Input from stdin
+    user_input = input("What kind of question do you have?\n\tFor example, you could try ask: What is the Game Name that has highest sales?\n")
+    # update user input in object
     newChat.get_user_input(user_input)
+    # Get SQL query
     response = newChat.get_response()
     print(response)
 

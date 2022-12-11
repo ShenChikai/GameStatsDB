@@ -1,0 +1,87 @@
+<!-- Inheritance -->
+{% extends "home.html" %}
+
+<!-- Title Overwrite -->
+{% block title %}
+    Search by English Text
+{% endblock %}
+
+<!-- Navbar Overwrite -->
+{% block navHighlight %}
+<div class="collapse navbar-collapse" id="navbarText">
+    <ul class="navbar-nav mr-auto">
+    <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('home') }}">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('interactiveTable') }}">Interactive Table</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('marketSahre') }}">Share Analysis</a>
+    </li>
+    <li class="nav-item active">
+        <a class="nav-link" href="{{ url_for('textSearch') }}">Search by Text</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('about') }}">About</a>
+    </li>
+    </ul>
+    <span class="navbar-text">
+    powered by Yanjie Qi & Chikai Shen
+    </span>
+</div>
+{% endblock %}
+
+<!-- Content Overide -->
+{% block content %}
+
+<h3 style="color: rgba(255,255,255, 0.9);font-family: Arial;"> 
+    &#128214;Search by what you're interested in English: </h3>
+
+    <div id="searchBar" style="margin-bottom: 1%;">
+        <form action="#" method="post">
+            <div class="form-row align-items-center">
+              <div class="col-auto my-1 w-75">
+                <div class="input-group mr-sm-2">
+                    <input 
+                        type="text" 
+                        class="form-control mr-sm-2" 
+                        id="inlineFormInput" 
+                        placeholder="What's the game that has the most sales?"
+                        name="EnglishText"
+                    >
+                </div>
+              </div>
+    
+              <div class="col-auto my-1">
+                <button type="submit" class="btn btn-primary mr-sm-2" name="tableSubmit">Search&#128269;</button>
+              </div>
+            </div>
+          </form>
+
+<div id="tableDiv"></div>
+
+<script type="text/javascript">
+    var header = {{ header|tojson }};
+    var table = {{ table|tojson }};
+    
+    if (header.length == 0) {
+        let tableDiv = document.getElementById('tableDiv');
+        let emptyText = document.createElement('h2');
+        emptyText.style.color = 'rgba(255,255,255, 0.8)';
+        emptyText.style.marginLeft = '5%';
+        emptyText.style.marginTop = '2%';
+        emptyText.textContent = "Searching in English may take a while...";
+        tableDiv.appendChild(emptyText);
+
+        let notes = document.createElement('p');
+        notes.style.color = 'rgba(255,255,255, 0.8)';
+        notes.style.marginLeft = '7%';
+        notes.textContent = "Alpha version testing with ChatGPT.";
+        tableDiv.appendChild(notes);
+    } else {
+        createTable(header, table, 'tableDiv');
+    }
+    
+</script>
+{% endblock %}

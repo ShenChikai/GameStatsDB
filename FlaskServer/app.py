@@ -221,7 +221,27 @@ def marketSahre():
         data["CompanyMCShare"].append(item[2])
     return render_template("marketShare.html", labels = labels, data = data)
 
-
+############################################################################################
+# Text-to-SQL ChatGPT Page
+@app.route("/textSearch", methods=["GET","POST"])
+def textSearch():
+    # handle get request
+    if request.method == "POST":
+        args = request.form
+        print(args['EnglishText'])
+        # # Call ChatGPT
+        # SQL_Statement = chat_gpt_translate(args['EnglishText'])
+        # # Query Database
+        # header, table = [], []
+        # cursor.execute(SQL_Statement)
+        # for column in cursor.description:
+        #     header.append(column[0])
+        # for item in cursor:
+        #     table.append(item)
+        return render_template("textSearch.html", header = [['test header']], table = [['test table']])
+    else:
+        # init page
+        return render_template("textSearch.html", header = [], table = [])
 ############################################################################################
 # About Page
 @app.route("/about")
@@ -229,9 +249,9 @@ def about():
     return render_template("about.html")
 
 # Main
-if __name__ == '__main__':
-    app.run(host="0.0.0.0", port="5000")
+# if __name__ == '__main__':
+#     app.run(host="0.0.0.0", port="5000")
 
 # Test Main
-# if __name__ == '__main__':
-#     app.run(debug=True, port=8000)
+if __name__ == '__main__':
+    app.run(debug=True, port=8000)

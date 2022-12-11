@@ -54,16 +54,13 @@ class User2SQL:
             query += ";"
         return query
 
-def main():
-    # Initialize User2SQL object
-    newChat = User2SQL()
-    # Get User Input from stdin
-    user_input = input("What kind of question do you have?\n\tFor example, you could try ask: What is the Game Name that has highest sales?\n")
-    # update user input in object
-    newChat.get_user_input(user_input)
-    # Get SQL query
-    response = newChat.get_response()
-    print(response)
 
-if __name__ == '__main__':
-    main()
+# def main():
+#     newChat = User2SQL()
+#     user_input = input("What kind of question do you have?\n For example, you could try ask: What is the Game Name that has highest sales?\n")
+#     newChat.get_user_input(user_input)
+#     response = newChat.get_response()
+#     print(response)
+
+# if __name__ == '__main__':
+#     main()

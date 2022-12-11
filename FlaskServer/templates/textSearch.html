@@ -1,6 +1,37 @@
 <!-- Inheritance -->
 {% extends "home.html" %}
 
+<!-- Style Overwrite -->
+{% block style %}
+
+<link rel="stylesheet" type= "text/css" href= "{{ url_for('static',filename='style/loading.css') }}"> 
+
+<style>
+    table {
+        background-color: rgba(52,58,64,0.6) !important;
+    }
+
+    @media (max-width: 900px) {
+        table {
+            display: block;
+            overflow-x: scroll !important;
+        }
+    }
+
+    .loading {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: rgba(0,0,0,.5);
+    }
+</style>
+
+{% endblock %}
+
 <!-- Title Overwrite -->
 {% block title %}
     Search by English Text
@@ -41,44 +72,70 @@
     <div id="searchBar" style="margin-bottom: 1%;">
         <form action="#" method="post">
             <div class="form-row align-items-center">
-              <div class="col-auto my-1 w-75">
-                <div class="input-group mr-sm-2">
-                    <input 
-                        type="text" 
-                        class="form-control mr-sm-2" 
-                        id="inlineFormInput" 
-                        placeholder="What's the game that has the most sales?"
-                        name="EnglishText"
-                    >
+                <div class="col-auto my-1 w-75">
+                    <div class="input-group mr-sm-2">
+                        <input 
+                            type="text" 
+                            class="form-control mr-sm-2" 
+                            id="inlineFormInput" 
+                            placeholder="What's the game that has the most sales?"
+                            name="EnglishText"
+                        >
+                    </div>
                 </div>
-              </div>
     
-              <div class="col-auto my-1">
-                <button type="submit" class="btn btn-primary mr-sm-2" name="tableSubmit">Search&#128269;</button>
-              </div>
+                <div class="col-auto my-1">
+                    <button type="submit" class="btn btn-primary mr-sm-2" 
+                        name="tableSubmit" onclick="renderLoading('loadDiv');">
+                            Search&#128269;</button>
+                </div>
             </div>
-          </form>
+        </form>
+    </div>
+    
 
 <div id="tableDiv"></div>
+
+<div class="loading" id="loadDiv" style="display: none;">
+    <div class="pacman"></div>
+    <div class="dot"></div>
+</div>
+
+
+
+
+<script type="text/javascript" src="{{ url_for('static', filename='table.js') }}"></script>
 
 <script type="text/javascript">
     var header = {{ header|tojson }};
     var table = {{ table|tojson }};
+    var errorMsg = {{ errorMsg|tojson }};
     
     if (header.length == 0) {
-        let tableDiv = document.getElementById('tableDiv');
-        let emptyText = document.createElement('h2');
-        emptyText.style.color = 'rgba(255,255,255, 0.8)';
-        emptyText.style.marginLeft = '5%';
-        emptyText.style.marginTop = '2%';
-        emptyText.textContent = "Searching in English may take a while...";
-        tableDiv.appendChild(emptyText);
+        if (errorMsg != '') {
+            let tableDiv = document.getElementById('tableDiv');
+            let errorMsgTxt = document.createElement('h2');
+            errorMsgTxt.style.color = 'rgba(255,255,255, 0.8)';
+            errorMsgTxt.style.marginLeft = '5%';
+            errorMsgTxt.style.marginTop = '2%';
+            errorMsgTxt.textContent = errorMsg;
+            tableDiv.appendChild(errorMsgTxt);
+        } else {
+            let tableDiv = document.getElementById('tableDiv');
+            let emptyText = document.createElement('h2');
+            emptyText.style.color = 'rgba(255,255,255, 0.8)';
+            emptyText.style.marginLeft = '5%';
+            emptyText.style.marginTop = '2%';
+            emptyText.textContent = "Searching in English may take a while...";
+            tableDiv.appendChild(emptyText);
 
-        let notes = document.createElement('p');
-        notes.style.color = 'rgba(255,255,255, 0.8)';
-        notes.style.marginLeft = '7%';
-        notes.textContent = "Alpha version testing with ChatGPT.";
-        tableDiv.appendChild(notes);
+            let notes = document.createElement('p');
+            notes.style.color = 'rgba(255,255,255, 0.8)';
+            notes.style.marginLeft = '7%';
+            notes.textContent = "Alpha version testing with ChatGPT.";
+            tableDiv.appendChild(notes);
+        }
+        
     } else {
         createTable(header, table, 'tableDiv');
     }

@@ -1,7 +1,10 @@
+![UML Class Diagram](/DemoImage/homePage.png)
 # Project Intro
 - The goal of the project is to offer tools to analyze gaming platforms, explore gaming industry companies, and search for games desired by the users given a list of available search, sort, and filter options. The project provides analysis on various popular games on the market along with information of their publisher companies and their platforms based on data from gaming awards, sales, genres, company stock performance, etc. The complete product will be presented in a form of full-stack 3-tier architecture with web-based client, functional and utility server, and relational database each handling their specific tasks.
 
 # MySQL Database with MariaDB
+- UML Class Diagram
+    - ![UML Class Diagram](/DemoImage/UML.png)
 - The project uses **MariaDB 10.6** as its production level database, and this also aligns with the database provided through Ugrad machine
 - *NOTE: Database configurations are read from environment variable, so do not foget to include a .env file for that.
 - Client Side (Flask)
@@ -129,6 +132,19 @@
 
 
     - Source: https://medium.com/techfront/step-by-step-visual-guide-on-deploying-a-flask-application-on-aws-ec2-8e3e8b82c4f7
+
+# User Mannual for Local Deployment
+    - First of all, you must have python.
+    1. Create Python Vitural Envrionment
+        - Create: ```python -m venv FlaskServer```
+        - Activate: ```.\FlaskServer\Scripts\activate``` (for Win)
+        - Deactivate: ```deactivate``` (for Win)
+    2. Install All Dependency Requirements under the Virtual Env
+        - ```pip install -r requirements.txt```
+    3. Run server
+        - ```python \FlaskServer\app.py```
+        - Go to http://127.0.0.1:8000
+        - Check it out!
 
 # Front End
 ## JavaScript

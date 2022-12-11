@@ -68,3 +68,10 @@ function fillDropDownOptions(id, data) {
         document.getElementById(id).appendChild(option);
     };
 }
+
+function renderLoading(zone) {
+    console.log('loading...');
+    setInterval(function() {
+        let loading = document.getElementById(zone).style.display = 'block';
+    }, 1000);
+}

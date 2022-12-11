@@ -8,6 +8,7 @@ from dotenv import load_dotenv
 
 # Customized Import
 from dbConn import connectToDB
+from chatGPT2SQL import User2SQL
 
 # Flask Obj Creation
 app = Flask(__name__)
@@ -229,19 +230,30 @@ def textSearch():
     if request.method == "POST":
         args = request.form
         print(args['EnglishText'])
-        # # Call ChatGPT
-        # SQL_Statement = chat_gpt_translate(args['EnglishText'])
-        # # Query Database
-        # header, table = [], []
-        # cursor.execute(SQL_Statement)
-        # for column in cursor.description:
-        #     header.append(column[0])
-        # for item in cursor:
-        #     table.append(item)
-        return render_template("textSearch.html", header = [['test header']], table = [['test table']])
+        # Call ChatGPT
+        tStart = time.time()
+        newChat = User2SQL()
+        newChat.get_user_input(args['EnglishText'])
+        SQL_Statement = newChat.get_response()
+        print(SQL_Statement)
+        tEnd = time.time()
+        tElapsed = round(tEnd-tStart)
+        print(f'Took {tElapsed}s')
+        # Query Database
+        header, table = [], []
+        errorMsg = ""
+        try:
+            cursor.execute(SQL_Statement)
+            for column in cursor.description:
+                header.append(column[0])
+            for item in cursor:
+                table.append(item)
+        except:
+            errorMsg = "Sorry, ChatGPT could not proper process your query at this time. Please try something else."
+        return render_template("textSearch.html", header = header, table = table, errorMsg=errorMsg)
     else:
         # init page
-        return render_template("textSearch.html", header = [], table = [])
+        return render_template("textSearch.html", header = [], table = [], errorMsg = "")
 ############################################################################################
 # About Page
 @app.route("/about")

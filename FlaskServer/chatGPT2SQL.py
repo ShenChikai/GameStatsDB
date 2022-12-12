@@ -13,7 +13,10 @@ class User2SQL:
         self.__run_chatbot__()
     # Initialize the chatbot
     def __run_chatbot__(self) -> None:
-        self.chatbot = Chatbot(self.config, conversation_id=None)
+        try:
+            self.chatbot = Chatbot(self.config, conversation_id=None)
+        except:
+            raise ConnectionRefusedError
     # Need to run this function to set up the input format for chatbot
     def get_user_input(self, user_input: str) -> None:
         self.user_input = user_input

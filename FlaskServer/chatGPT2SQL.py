@@ -7,7 +7,7 @@ class User2SQL:
     def __init__(self) -> None:
         self.user_input = None
         self.exist = True
-        self.config = config = {
+        self.config = {
             "session_token": "eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..EGaGgz2azysRhDy9.tVGyrv4CU5e0ISPxjIzzZ58ZGY4draIyo5mrDiobxSXodc8KzeWtybPh_hny0NUKGqjgCqeYCCQntKi1z-cOSq9Q6UdlNa3olQhCK4Y5Rzyu8vsBpZulfJ48rMokhn7RnQgwlL9YI8bmPA3HFg-0gTE2m-CKBHq79_7c4u7eOjxGeTcbLgVD2uzBGp7FlbHhMhJZg4k_TsDf3jki7BGVhF78pXj1cl5UDN2cakG0jnPD-Kk-h4Qjp7vMjlU2FYp26iNUe6aXUfEQAAhvmGCD7-2QZxZGfkel-nl7xj1LdCF12rpOlFfNYTiE5kWyBIHVnxdCs-_rDqedbfK28iw46LgQdTKJqlOhNp4R8279YYiIn46rkwlZFM2TjXoDYfzJXsL5BDhSl7mbWL411a-e3nZQcEokP8ltdED7WgJ8bRhC_XiQ9F_FQb-OOE9c3EvxgARRms5A41z5HIM7WYYhnTWg2VWrcfLlMjfgiPk_GMjwWl-5bhh9xkuXeKzQ4bJRDmccYTfj5BQOt4Zy1DWcoGKt5diphdRQMpfTcZvRqwt_4m2ugkEF__3g-aCjWJ3pef8odI4qSihULPKq0_mfywF5X5VR8YBofGicscDgZiZ5y3Ni6fL_KQTe-1KhXNbGck0UYtMvOGtDOPkyH0-J_wGSx7be3sdyqifGUJ2IhFJepdITLxqMgMt3-kcGsZJXzrUVf3dPg5799mEPV_pVi_ePjvutJ44OQhl57CBg5zFxVP9soYM6eO-oqcasQdDHOM1MZiStN218NEfunNJoCDEF3wJ24TQMn7q_YXnbEUPghJRQ059QOjHXosJnkjU4z_FS2ZdBZPm1stpX9WEQfCYr38xVkQWQDqhhYIWA5rtY_GkDAIXyi1hZ4PZKfvYymyFpB0Cnsy_ZIRZZBjo9nrYq18eN0n4VslgAuVDTSyoWDrVEiPIbKxAdDUAd7ySd8MKgtKEz26SacOjV5FRVGCqj56WGhsAJ5N7PUg2fV9Vk3PDy81nUhCAdF5BTUqGczHINLCig4WzQSm0knf8aoypmrGbsUPSU5RQffSVS4QkD4nnZN5jafFdqBR_1yIrSkMPCuLhW8FxMdz9do9XgPGuwYe_KlD0tWSNrbDp_xFf_7JAG1p8LXGhe_EKJj4_UWQud9VgT7SshTZ9Rp1skcFOwP5nXWNDR2bxzwuFvWZQ0NxvFeV_i0yJ1X2q1Y8MiGesl2G3U5vGfPcY2PAUUrSDpM6uyAEIEqvDZau2FSUsaooaZQrWjNSnonr5eb29buOliw1P_pz_NAn2KTCfJ81zNjt98toOfmaT5cCV_LN7ELiiG9pcEyT6w7uQ6oJrzolsBgJJzgMTg9os9XDkkDrxv56cGKKrkQNYIAnXGXOuYElFu0-S8N12t_Bls7UHw5A37u6ZJy-STqaBzFAmU2uNotiJqFtzcAA20-bW7ONgkXtbp4zrjkjKRthY8R6NliyeD72uR4p0126qniSgLnqtHOMDD6_zVG5TloGOi8PUagSYxBx08URUg54-pjaUT7IL6nkX4JgTqdOEDeOmieeHBMIj3sGdjuwiAf4_aUafwIwaJcCqPhOh7Y2YRFmpsjng-ZZR775-haCgdhq1IxhjWgMNQAfz9OxYrqRhWxCll15jpkKqymUcg9vzJBssn17icqTv38BcZZUPKObptHaxwXKmMqMWxHt7IhQflTP55UVm4NPdaaMNEaPFP2N1xUwPR5WcmSCextxtBpgiP8HzbxJutF3gsB2EeRk73MHpoU-Ds-6JhnX1e0qJQYlFge_u3T6JHuacEjZCvOI1OIBV4wQpwUpTnjTBumuxExofjiY8M7m2I4GfFAEAw5df4g6lvB3YxXj55kJOuM0JYsOziKP8gRvMv4wDTTU9QKjZ1REO4cOEABODvyFbBMEoeHpL0iqf-wstyL9G7Q2_wNEMYiq8amQ3yMERwPzY0jYJaSi4IjDb9LFMo7i171UMi0wEXbpN5m5pJUqddOZdQva1nYYxDyJspgjms1A0BSJz8zgYmql1N_qGZdKKROZErhaobfLjk6Fx_W0btae7TU1nUvtNJcAwhT6H1UP-OfLcV9lFTkoxMI9bXMQh9J30vmgGqIYQnStVdsw2WOouIvF9HjXxufas3Dmon4kSDTayhSksN3zJZn9Y8Y2oZG5rh6X0atVSs-EsVRBc8zFFXx4_nU2uTAXOmUDQRZxK0R5M0ADCQu_rM5ACpMqwM3OdqFNPQ.75tGkcc1Ci3EWkzT2KS5Ig"
         }
         self.__run_chatbot__()
@@ -48,19 +48,22 @@ class User2SQL:
         try:
             query = self.response.split("\n```\n")[1].rstrip('\n').split('\n')
         except:
-            print("Question is either not in the correct format or we do not have such information in our database!")
+            raise ValueError
         query = " ".join(query)
         if query[-1] != ";":
             query += ";"
         return query
 
-
-# def main():
-#     newChat = User2SQL()
-#     user_input = input("What kind of question do you have?\n For example, you could try ask: What is the Game Name that has highest sales?\n")
-#     newChat.get_user_input(user_input)
-#     response = newChat.get_response()
-#     print(response)
+def main():
+    # Initialize User2SQL object
+    newChat = User2SQL()
+    # Get User Input from stdin
+    user_input = input("What kind of question do you have?\n\tFor example, you could try ask: What is the Game Name that has highest sales?\n")
+    # update user input in object
+    newChat.get_user_input(user_input)
+    # Get SQL query
+    response = newChat.get_response()
+    print(response)
 
 # if __name__ == '__main__':
 #     main()

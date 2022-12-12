@@ -128,7 +128,7 @@
         - ```sudo service apache2 stop```
         - ```sudo systemctl restart nginx```
         - ```sudo systemctl enable nginx```
-    13. Site available through: ```52.14.195.69```
+    13. Site available through: ```http://52.14.195.69```
         - Test database connection: ```mysql -u admin -h 52.14.195.69 -p```
 
 

@@ -25,9 +25,9 @@ CREATE PROCEDURE InteractiveTableSearch (GName varchar(50), GType varchar(50),
 BEGIN
 	IF IsDesc = 'True' THEN
         IF AName = '' THEN
-            SELECT UNIQUE (g.GName AS 'Game', g.Sales, g.ReleaseDate AS 'Release Date', g.IsF2P AS 'F2P', 
+            SELECT DISTINCT g.GName AS 'Game', g.Sales, g.ReleaseDate AS 'Release Date', g.IsF2P AS 'F2P', 
                     c.CName AS 'Company', c.MarketCap, c.Country,
-                    a.AName AS 'Award', gnba.YearNominated AS 'Year Nominated', gnba.DidWin AS 'Won')
+                    a.AName AS 'Award', gnba.YearNominated AS 'Year Nominated', gnba.DidWin AS 'Won'
             FROM Game g
                 LEFT JOIN GameHasGenre ghg ON ghg.GID = g.GID
                 LEFT JOIN PlatformHostsGame phg ON phg.GID = g.GID
@@ -40,9 +40,9 @@ BEGIN
                 AND p.PName LIKE CONCAT('%', PName, '%')
             ORDER BY g.Sales DESC;
         ELSE
-            SELECT UNIQUE (g.GName AS 'Game', g.Sales, g.ReleaseDate AS 'Release Date', g.IsF2P AS 'F2P', 
+            SELECT DISTINCT g.GName AS 'Game', g.Sales, g.ReleaseDate AS 'Release Date', g.IsF2P AS 'F2P', 
                     c.CName AS 'Company', c.MarketCap, c.Country,
-                    a.AName AS 'Award', gnba.YearNominated AS 'Year Nominated', gnba.DidWin AS 'Won')
+                    a.AName AS 'Award', gnba.YearNominated AS 'Year Nominated', gnba.DidWin AS 'Won'
             FROM Game g
                 LEFT JOIN GameHasGenre ghg ON ghg.GID = g.GID
                 LEFT JOIN PlatformHostsGame phg ON phg.GID = g.GID
@@ -58,9 +58,9 @@ BEGIN
         
     ELSE
         IF AName = '' THEN
-            SELECT UNIQUE (g.GName AS 'Game', g.Sales, g.ReleaseDate AS 'Release Date', g.IsF2P AS 'F2P', 
+            SELECT DISTINCT g.GName AS 'Game', g.Sales, g.ReleaseDate AS 'Release Date', g.IsF2P AS 'F2P', 
                     c.CName AS 'Company', c.MarketCap, c.Country,
-                    a.AName AS 'Award', gnba.YearNominated AS 'Year Nominated', gnba.DidWin AS 'Won')
+                    a.AName AS 'Award', gnba.YearNominated AS 'Year Nominated', gnba.DidWin AS 'Won'
             FROM Game g
                 LEFT JOIN GameHasGenre ghg ON ghg.GID = g.GID
                 LEFT JOIN PlatformHostsGame phg ON phg.GID = g.GID
@@ -73,9 +73,9 @@ BEGIN
                 AND p.PName LIKE CONCAT('%', PName, '%')
             ORDER BY g.Sales ASC;
         ELSE
-            SELECT UNIQUE (g.GName AS 'Game', g.Sales, g.ReleaseDate AS 'Release Date', g.IsF2P AS 'F2P', 
+            SELECT DISTINCT g.GName AS 'Game', g.Sales, g.ReleaseDate AS 'Release Date', g.IsF2P AS 'F2P', 
                     c.CName AS 'Company', c.MarketCap, c.Country,
-                    a.AName AS 'Award', gnba.YearNominated AS 'Year Nominated', gnba.DidWin AS 'Won')
+                    a.AName AS 'Award', gnba.YearNominated AS 'Year Nominated', gnba.DidWin AS 'Won'
             FROM Game g
                 LEFT JOIN GameHasGenre ghg ON ghg.GID = g.GID
                 LEFT JOIN PlatformHostsGame phg ON phg.GID = g.GID
@@ -93,16 +93,3 @@ END $$
 
 
 -- CALL InteractiveTableSearch('','','','','True');
-
- SELECT g.GName AS 'Game', g.Sales, g.ReleaseDate AS 'Release Date', g.IsF2P AS 'F2P', 
-                    c.CName AS 'Company', c.MarketCap, c.Country,
-                    a.AName AS 'Award', gnba.YearNominated AS 'Year Nominated', gnba.DidWin AS 'Won'
-            FROM Game g
-                LEFT JOIN GameHasGenre ghg ON ghg.GID = g.GID
-                LEFT JOIN PlatformHostsGame phg ON phg.GID = g.GID
-                LEFT JOIN Platform p ON p.PID = phg.PID
-                LEFT JOIN CompanyOwnsGame cog ON cog.GID = g.GID
-                LEFT JOIN Company c ON c.CID = cog.CID
-                LEFT JOIN GameNominatedByAward gnba ON gnba.GID = g.GID
-                LEFT JOIN Award a on a.AID = gnba.AID
-            ORDER BY g.Sales DESC;

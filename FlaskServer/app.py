@@ -231,25 +231,34 @@ def textSearch():
         args = request.form
         print(args['EnglishText'])
         # Call ChatGPT
+        # Try to establish connection with ChatGPT
+        errorMsg = ""
+        requestPass = False
         tStart = time.time()
-        newChat = User2SQL()
-        newChat.get_user_input(args['EnglishText'])
-        SQL_Statement = newChat.get_response()
-        print(SQL_Statement)
+        try:
+            newChat = User2SQL()
+            newChat.get_user_input(args['EnglishText'])
+            SQL_Statement = newChat.get_response()
+            print(SQL_Statement)
+            requestPass = True
+        except:
+            errorMsg = "Sorry, ChatGPT is currently down. Please come back and try later."
+        # Compute Time elapsed
         tEnd = time.time()
         tElapsed = round(tEnd-tStart)
         print(f'Took {tElapsed}s')
         # Query Database
         header, table = [], []
-        errorMsg = ""
-        try:
-            cursor.execute(SQL_Statement)
-            for column in cursor.description:
-                header.append(column[0])
-            for item in cursor:
-                table.append(item)
-        except:
-            errorMsg = "Sorry, ChatGPT could not proper process your query at this time. Please try something else."
+        if requestPass:
+            try:
+                cursor.execute(SQL_Statement)
+                for column in cursor.description:
+                    header.append(column[0])
+                for item in cursor:
+                    table.append(item)
+            except:
+                errorMsg = "Sorry, ChatGPT could not proper process your query at this time. Please try something else."
+        
         return render_template("textSearch.html", header = header, table = table, errorMsg=errorMsg)
     else:
         # init page

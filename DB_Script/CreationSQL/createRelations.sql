@@ -1,4 +1,5 @@
 -- Execute: \. /home/ubuntu/DB_CREATE/CreationSQL/createRelations.sql
+-- Create all Relations in the database
 CREATE TABLE GameNominatedByAward (
 	GID int,
 	AID int,

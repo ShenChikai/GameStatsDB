@@ -1,4 +1,6 @@
 -- Execute: \. /home/ubuntu/DB_CREATE/CreationSQL/dropAll.sql
+-- Drop all Relations and Entities in the Database
+-- This is included for testing purpose
 -- Must drop relations first due to foreign key dependencies
 DROP TABLE GameNominatedByAward;
 DROP TABLE GameHasGenre;

@@ -2,7 +2,9 @@
 --     SHOW PROCEDURE STATUS WHERE db = 'GameStats';
 
 -- Drop All stored procedures
+-- This is included for testing purpose
 -- execute: \. /home/ubuntu/DB_CREATE/StoredProcedures/dropAllProcedures.sql
+
 -- Market Shares
 DROP PROCEDURE IF EXISTS GenreShare;
 DROP PROCEDURE IF EXISTS PlatformShare;

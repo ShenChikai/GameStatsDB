@@ -125,6 +125,8 @@
     12. To restart service
         - Do step 9.
         - If setp 9. does not work, do below:
+        - ```sudo systemctl start FlaskServer```
+        - OR
         - ```sudo service apache2 stop```
         - ```sudo systemctl restart nginx```
         - ```sudo systemctl enable nginx```
@@ -134,9 +136,9 @@
 
     - Source: https://medium.com/techfront/step-by-step-visual-guide-on-deploying-a-flask-application-on-aws-ec2-8e3e8b82c4f7
 
-# User Mannual for Local Deployment
+# User Manual for Local Deployment
     - First of all, you must have python.
-    1. Create Python Vitural Envrionment
+    1. Create Python Virtual Environment
         - Create: ```python -m venv FlaskServer```
         - Activate: ```.\FlaskServer\Scripts\activate``` (for Win)
         - Deactivate: ```deactivate``` (for Win)

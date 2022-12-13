@@ -1,4 +1,5 @@
 -- Execute: \. /home/ubuntu/DB_CREATE/CreationSQL/createEntities.sql
+-- Create all Entities in the Database
 -- **If were to drop all entities, must drop all relations first
 CREATE TABLE Game (
 	GID int Primary Key,

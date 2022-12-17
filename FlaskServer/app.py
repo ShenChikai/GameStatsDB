@@ -242,6 +242,7 @@ def textSearch():
             print(SQL_Statement)
             requestPass = True
         except:
+            print('ChatGPT Error: Connection Establish Failed.')
             errorMsg = "Sorry, ChatGPT is currently down. Please come back and try later."
         # Compute Time elapsed
         tEnd = time.time()
@@ -257,6 +258,7 @@ def textSearch():
                 for item in cursor:
                     table.append(item)
             except:
+                print('ChatGPT Error: Query Failed.')
                 errorMsg = "Sorry, ChatGPT could not proper process your query at this time. Please try something else."
         
         return render_template("textSearch.html", header = header, table = table, errorMsg=errorMsg)

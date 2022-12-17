@@ -60,6 +60,7 @@
 ## Project Dependencies
 - Install Requirements under the virtual env: ```pip install -r requirements.txt```
 - Created with ```pip freeze > requirements.txt``` under the virtual env
+    - Install pop-up window for ChatGPT ```playwright install```
 
 ## Setup and AWS Deployment
 - ### Create Vitural 
@@ -146,7 +147,7 @@
         - ```pip install -r requirements.txt```
     3. Run server
         - ```python \FlaskServer\app.py```
-        - Go to http://127.0.0.1:8000
+        - Go to ```http://127.0.0.1:8000```
         - Check it out!
 
 # Front End

@@ -1,4 +1,4 @@
--- Execute: \. /home/ubuntu/DB_CREATE/StoredProcedures/Home_Stock/getStock.sql
+-- Execute: \. /home/ubuntu/GameStatsDB/DB_Script/StoredProcedures/Home_Stock/getStock.sql
 DELIMITER $$
 -- Get Stock data by <companyName>, <startDate>, <endDate>
 CREATE PROCEDURE GetStock (companyName varchar(30), startDate date, endDate date)

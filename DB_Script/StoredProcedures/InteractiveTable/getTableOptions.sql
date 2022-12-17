@@ -1,4 +1,4 @@
--- Execute: \. /home/ubuntu/DB_CREATE/StoredProcedures/InteractiveTable/getTableOptions.sql
+-- Execute: \. /home/ubuntu/GameStatsDB/DB_Script/StoredProcedures/InteractiveTable/getTableOptions.sql
 DELIMITER $$
 
 -- Get All Options for Table

@@ -1,4 +1,4 @@
--- Execute: \. /home/ubuntu/DB_CREATE/StoredProcedures/MarketShare/marketShare.sql
+-- Execute: \. /home/ubuntu/GameStatsDB/DB_Script/StoredProcedures/MarketShare/marketShare.sql
 DELIMITER $$
 -- Genre Share
 CREATE PROCEDURE GenreShare ()

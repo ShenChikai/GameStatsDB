@@ -12,6 +12,9 @@
     - MariaDB is a community-developed, commercially supported fork of the MySQL relational database management system
         - https://mariadb.com/resources/blog/how-to-connect-python-programs-to-mariadb/
     - Install: ```pip3 install mariadb```
+        - To below before pip install
+        - ```sudo apt-get update -y```
+        - ```sudo apt-get install -y libmariadb-dev```
 - Database Side (MariaDB)
     - **The MariaDB will be installed on our Ubuntu AWS instance**
     - Check connectivity and port: ```netstat -ant | grep 3306```
@@ -60,7 +63,9 @@
 ## Project Dependencies
 - Install Requirements under the virtual env: ```pip install -r requirements.txt```
 - Created with ```pip freeze > requirements.txt``` under the virtual env
-    - Install pop-up window for ChatGPT ```playwright install```
+    - Install pop-up window for ChatGPT to validate user
+        - ```playwright install```
+        - ```sudo playwright install-deps```
 
 ## Setup and AWS Deployment
 - ### Create Vitural 
@@ -84,21 +89,22 @@
     6. Install Flask: ```pip install flask```
     - *What's above are all for development. When you “run” flask, you are actually running Werkzeug’s development WSGI server, which forward requests from a web server.*
     7. To have production-ready WSGI server - Install **Gunicorn**: ```sudo pip install gunicorn```
-    8. Create ```service``` file to boot and manage gunicornL 
-        - ```sudo nano /etc/systemd/system/FlaskServer.service```
+    8. Create Service file to boot and manage gunicornL 
+        - ```sudo vim /etc/systemd/system/FlaskServer.service```
         -   ```
-            [Unit]
-            Description=Gunicorn instance for GameStats app
-            After=network.target
-            [Service]
-            User=ubuntu
-            Group=www-data
-            WorkingDirectory=/home/ubuntu/GameStatsDB/FlaskServer
-            ExecStart=/home/ubuntu/.local/bin/gunicorn -b localhost:8000 app:app
-            Restart=always
-            [Install]
-            WantedBy=multi-user.target
+[Unit]
+Description=Gunicorn instance for GameStats app
+After=network.target
+[Service]
+User=ubuntu
+Group=www-data
+WorkingDirectory=/home/ubuntu/GameStatsDB/FlaskServer
+ExecStart=/home/ubuntu/.local/bin/gunicorn -b localhost:8000 app:app
+Restart=always
+[Install]
+WantedBy=multi-user.target
             ```
+                - make sure to have correct path to Gunicorn
     9. Enable Service with systemctl
         -   ```
             sudo systemctl daemon-reload
@@ -120,7 +126,7 @@
             ```
         -   ```
             location / {
-                proxy_pass http://flaskhelloworld;
+                proxy_pass http://FlaskServer;
             }
             ```
     12. To restart service
@@ -128,7 +134,7 @@
         - If setp 9. does not work, do below:
         - ```sudo systemctl start FlaskServer```
         - OR
-        - ```sudo service apache2 stop```
+        - ```sudo service apache2 stop```  // if no apache2: ```sudo apt install apache2```
         - ```sudo systemctl restart nginx```
         - ```sudo systemctl enable nginx```
     13. Site available through: ```http://52.14.195.69```

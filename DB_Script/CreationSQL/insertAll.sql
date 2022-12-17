@@ -1,4 +1,4 @@
--- Execute: \. /home/ubuntu/DB_CREATE/CreationSQL/insertAll.sql
+-- Execute: \. /home/ubuntu/GameStatsDB/DB_Script/CreationSQL/insertAll.sql
 -- ############################# Entities #############################
 -- Game
 -- 1,007: Quantum of Solace,3.3,2008/10/31,FALSE

@@ -241,7 +241,10 @@ def textSearch():
             SQL_Statement = newChat.get_response()
             print(SQL_Statement)
             requestPass = True
-        except:
+        except ValueError:
+            print('ChatGPT Error: Query Failed.')
+            errorMsg = "Sorry, ChatGPT could not proper process your query at this time. Please check if the English Query is correctly formated."
+        except ConnectionRefusedError:
             print('ChatGPT Error: Connection Establish Failed.')
             errorMsg = "Sorry, ChatGPT is currently down. Please come back and try later."
         # Compute Time elapsed
@@ -258,8 +261,8 @@ def textSearch():
                 for item in cursor:
                     table.append(item)
             except:
-                print('ChatGPT Error: Query Failed.')
-                errorMsg = "Sorry, ChatGPT could not proper process your query at this time. Please try something else."
+                print('Database Error: Query Wrong.')
+                errorMsg = "Sorry, it seems the English query is not properly formated."
         
         return render_template("textSearch.html", header = header, table = table, errorMsg=errorMsg)
     else:

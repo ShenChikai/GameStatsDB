@@ -35,7 +35,8 @@
         3. Creating an 'admin' User that Employs Password Authentication
             ```
             sudo mariadb
-            MariaDB [(none)]> GRANT ALL ON *.* to '<username>'@'%' IDENTIFIED BY '<password>' WITH GRANT OPTION;
+            MariaDB [(none)]> CREATE USER 'user'@'%' IDENTIFIED BY 'password';
+            MariaDB [(none)]> GRANT ALL ON *.* to 'user'@'%' IDENTIFIED BY 'password' WITH GRANT OPTION;
             MariaDB [(none)]> FLUSH PRIVILEGES;
             ```
         4. Becuase MariaDB default only listens on localhost:3306, we need to change that to 0.0.0.0
@@ -43,11 +44,13 @@
             ```sudo vim /etc/mysql/mariadb.cnf```
                 - Remove/Comment the socket connecting option
             - Add bind-addcress to 0.0.0.0 to open to public remote access
-            ```bind-address = 0.0.0.0``` in /etc/mysql/mariadb.conf.d/50-server.cnf
+            ```bind-address = 0.0.0.0``` in ```/etc/mysql/mariadb.conf.d/50-server.cnf```
             (If you cannot find 'bind-address', I suggest try ```sudo grep -r 'bind-address' /etc/mysql/*``` to locate it first.)
             - Then restart MariaDB service
             ```sudo systemctl restart mariadb```
-        5. Configure Firewall
+        5. Configure Firewall **Caution: if you're on AWS, manage inbound on AWS Console**
+            - Check Status: ```sudo ufw status```
+                - If inactive: ```sudo ufw enable```
             - ``` sudo ufw allow 3306``` grant access from any IP address
                 - Or ``` sudo ufw allow from <specific IP> to any port 3306``` which grants access from specifc IP address
             - Then ```sudo ufw reload```
@@ -135,7 +138,8 @@
             ```
     12. To start service
         - ```sudo service apache2 stop```  
-            - if you do not have apache2: ```sudo apt install apache2```
+            - We do this because we cannot have two web servers listening to the same port.
+            - You don't need to do this if you were on AWS Ubuntu (not installed on default).
         - ```sudo systemctl restart nginx```
         - ```sudo systemctl enable nginx```
     13. To restart service
@@ -143,8 +147,8 @@
         - If setp 9. does not work, do below:
         - ```sudo systemctl start FlaskServer```
         - Redo step 12.
-    14. Site available through: ```http://52.14.195.69```
-        - Test database connection: ```mysql -u admin -h 52.14.195.69 -p```
+    14. Site available through: ```http://3.95.158.254```
+        - Test database connection: ```mysql -u user_name -h host_ip -p```
 
 
     15. Delopyment Manual Source: https://medium.com/techfront/step-by-step-visual-guide-on-deploying-a-flask-application-on-aws-ec2-8e3e8b82c4f7

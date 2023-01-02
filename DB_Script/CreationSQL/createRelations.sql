@@ -1,5 +1,7 @@
 -- Execute: \. /home/ubuntu/GameStatsDB/DB_Script/CreationSQL/createRelations.sql
 -- Create all Relations in the database
+
+-- Create table for relation GameNominatedByAward
 CREATE TABLE GameNominatedByAward (
 	GID int,
 	AID int,
@@ -10,6 +12,7 @@ CREATE TABLE GameNominatedByAward (
 	FOREIGN KEY (AID) REFERENCES Award(AID)
 );
 
+-- Create table for relation GameHasGenre
 CREATE TABLE GameHasGenre (
 	GID int,
 	Genre varchar(50) NOT NULL,
@@ -17,6 +20,7 @@ CREATE TABLE GameHasGenre (
 	FOREIGN KEY (GID) REFERENCES Game(GID)
 );
 
+-- Create table for relation CompanyOwnsPlatform
 CREATE TABLE CompanyOwnsPlatform (
 	CID int,
 	PID int,
@@ -26,6 +30,7 @@ CREATE TABLE CompanyOwnsPlatform (
 	FOREIGN KEY (PID) REFERENCES Platform(PID)
 );
 
+-- Create table for relation CompanyOwnsGame
 CREATE TABLE CompanyOwnsGame (
 	CID int,
 	GID int,
@@ -34,6 +39,7 @@ CREATE TABLE CompanyOwnsGame (
 	FOREIGN KEY (GID) REFERENCES Game(GID)
 );
 
+-- Create table for relation PlatformHostsGame
 CREATE TABLE PlatformHostsGame (
 	PID int,
 	GID int,
@@ -42,6 +48,7 @@ CREATE TABLE PlatformHostsGame (
 	FOREIGN KEY (GID) REFERENCES Game(GID)
 );
 
+-- Create table for relation GameIsAvailableOn
 CREATE TABLE GameIsAvailableOn (
 	GID int,
 	OS VARCHAR(50),
@@ -49,6 +56,7 @@ CREATE TABLE GameIsAvailableOn (
 	FOREIGN KEY (GID) REFERENCES Game(GID)
 );
 
+-- Create table for relation CompanyHasStock
 CREATE TABLE CompanyHasStock (
 	CID int,
 	Ticker varchar(10),
@@ -57,7 +65,7 @@ CREATE TABLE CompanyHasStock (
 	FOREIGN KEY (Ticker) REFERENCES Stock(Ticker)
 );
 
-
+-- Create table for relation TimeTickerPrice
 CREATE TABLE TimeTickerPrice (
 	Date datetime,
 	Ticker varchar(10),

@@ -1,6 +1,8 @@
 -- Execute: \. /home/ubuntu/GameStatsDB/DB_Script/StoredProcedures/InteractiveTable/getTableOptions.sql
 DELIMITER $$
 
+-- Stored Procedure called in Interactive Table page
+
 -- Get All Options for Table
 CREATE PROCEDURE GetAllTableOptions ()
 BEGIN

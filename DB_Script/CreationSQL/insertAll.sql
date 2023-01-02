@@ -1,5 +1,8 @@
 -- Execute: \. /home/ubuntu/GameStatsDB/DB_Script/CreationSQL/insertAll.sql
 -- ############################# Entities #############################
+
+-- Code for insert all the data from CSV format
+
 -- Game
 -- 1,007: Quantum of Solace,3.3,2008/10/31,FALSE
 LOAD DATA LOCAL INFILE '/home/ubuntu/DB_CREATE/CSV_Data/Game.csv'

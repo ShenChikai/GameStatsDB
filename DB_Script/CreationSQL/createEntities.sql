@@ -1,6 +1,8 @@
 -- Execute: \. /home/ubuntu/GameStatsDB/DB_Script/CreationSQL/createEntities.sql
 -- Create all Entities in the Database
 -- **If were to drop all entities, must drop all relations first
+
+-- Create table for entity Game
 CREATE TABLE Game (
 	GID int Primary Key,
 	GName varchar(50) NOT NULL,
@@ -9,12 +11,14 @@ CREATE TABLE Game (
 	IsF2P varchar(5)
 );
 
+-- Create table for entity Award
 CREATE TABLE Award (
 	AID int Primary Key,
 	AName varchar(30) NOT NULL,
 	VotedByWho varchar(4) 
 );
 
+-- Create table for entity Company
 CREATE TABLE Company (
 	CID int Primary Key,
 	CName varchar(30) NOT NULL,
@@ -25,12 +29,14 @@ CREATE TABLE Company (
 	Country varchar(20)
 );
 
+-- Create table for entity Platform
 CREATE TABLE Platform (
 	PID int Primary key,
 	PName varchar(10),
 	FoundDate datetime
 );
 
+-- Create table for entity Stock
 CREATE TABLE Stock (
 	Ticker varchar(10) Primary Key,
 	Country varchar(30),

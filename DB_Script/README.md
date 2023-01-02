@@ -1,7 +1,21 @@
 # Database Automation Script
 - Script under this directory is reponsible for database creation and insertion for the cleaned data in csv format
-- Create
-    - ```createEntities.sql```
-    - ```createRelations.sql```
-- Insert
-    - ```insert.sql```
+
+- createEntities.sql
+    - Create all tables for Entities.
+- createRelations.sql
+    - Create all tables for Relations.
+- insertAll.sql
+    - Insert all data from CSV files.
+- dropAll.sql
+    - Drop all table relations. This is for testing purpose.
+- getStock.sql
+    - Includes stored procedures for getting stock data by (company, start data, end date) and get listed company names for page dropdown option rendering.
+- getTableOptions.sql
+    - Includes stored procedures for searching in the interactive table and get listed company names for page dropdown option rendering.
+- marketShare.sql
+    - Includes stored procedures for getting all the shares of categories.
+- dropAllProcedures.sql
+    - Drop all stored procedures. This is for testing purpose.
+- DataLoader.ipynb
+    - Data processing and cleaning for generating the data CSV files for loading the database.

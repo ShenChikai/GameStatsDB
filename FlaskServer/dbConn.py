@@ -5,6 +5,7 @@ import sys
 
 def connectToDB(dbconfig):
     # Connect
+    print('Trying ')
     try:
         conn = mariadb.connect(
             host=dbconfig['dbhost'],
